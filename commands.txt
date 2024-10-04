@@ -1,0 +1,30 @@
+Python virtual environment:
+
+1. Запуск віртуального середовища — .\Scripts\activate
+2. Зупинка віртуального середовища — deactivate
+
+
+PIP:
+
+1. Список встановлених пакетів — pip list
+2. Установлення нового пакету — pip install <package_name>
+3. Список застарілих пакетів — pip list -o
+4. Оновлення застарілого пакету — pip install -U <package_name>
+5. Зберігання списку використовуваних пакетів — pip freeze > packages.txt
+
+
+Django:
+
+1. Створення міграцій на основі змін в моделях — py manage.py makemigrations
+2. Застосування міграцій до бази даних — py manage.py migrate
+3. Створення адміністратора — py manage.py createsuperuser
+4. Створення нового застосунку — py manage.py startapp <app_name>
+5. Запуск серверу — py manage.py runserver
+
+GIT:
+
+1. Відмічаємо всі файли для їх подальшого додавання до комміту — git add .
+2. Створюємо новий комміт — git commit -m " "
+3. Пушимо зміни до репозиторію — git push --all
+4. Відкат всіх незакомічених змін до стану останнього комміту — git reset --hard
+5. Видалення всіх невідслідковуваних файлів — git clean -f
