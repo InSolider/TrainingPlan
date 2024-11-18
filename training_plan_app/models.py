@@ -1,4 +1,5 @@
 from django.db import models
+import re
 from translitua import translit, UkrainianKMU
 from tinymce.models import HTMLField
 
@@ -10,7 +11,9 @@ class Exercise(models.Model):
     desc = HTMLField(verbose_name='Опис')
 
     def save(self, *args, **kwargs):
-        self.link = translit(self.name, UkrainianKMU).lower().replace(' ', '-')
+        self.link = translit(self.name, UkrainianKMU).lower()
+        self.link = re.sub(r'[^a-z0-9]+', '-', self.link)
+        self.link = self.link.strip('-')
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -134,3 +134,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Path to the Random Forest Regression model
+
+RFR_MODEL_PATH = BASE_DIR / 'services' / 'RFR_Model.pkl'

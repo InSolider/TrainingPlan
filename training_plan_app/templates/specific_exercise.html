@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-nav">
                         <a class="nav-link" href="{% url 'home' %}">Домашня сторінка</a>
-                        <a class="nav-link" href="{% url 'exercises' %}">Усі вправи</a>
+                        <a class="nav-link" href="{% url 'all_exercises' %}">Усі вправи</a>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{% url 'home' %}">Домашня сторінка</a></li>
-                  <li class="breadcrumb-item"><a href="{% url 'exercises' %}">Усі вправи</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'all_exercises' %}">Усі вправи</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{ specific_exercise.name }}</li>
                 </ol>
             </nav>
