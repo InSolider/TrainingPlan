@@ -1,0 +1,49 @@
+body {
+    background-color: #EFFAFD;
+    color: #060640;
+}
+
+.navbar {
+    font-size: 1.25rem;
+    padding: 1rem 1.25rem;
+}
+
+.navbar-color-bottom {
+    border-bottom: 1px solid #060640;
+}
+
+.nav_logo {
+    height: 50px;
+}
+
+.nav-admin {
+    opacity: 0;
+}
+  
+.nav-link {
+    color: #060640;
+    transition: color 0.3s ease;
+}
+  
+.nav-link:hover {
+    color: #1A1A7F;
+    text-decoration: underline;
+    text-decoration-color: rgb(26, 26, 127, 0.8);
+}
+
+.nav-link[aria-current="page"] {
+    color: #1A1A7F;
+    font-weight: 500;
+}
+
+input.form-control {
+    border: 1px solid #060640;
+}
+
+.search-margin {
+    margin-bottom: 15px;
+}
+
+.last-container {
+    margin-bottom: 50px;
+}

@@ -6,47 +6,54 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
-        <title>{{ specific_exercise.name }}</title>
+        <title>{{ specific_exercise.name_ukr }}</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/specific_exercise.css' %}" />
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/favicon.svg' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+        <!-- Navigation Header -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm navbar-color-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home_ukr' %}" aria-label="Home">
+                    <img src="{% static 'img/favicon.svg' %}" alt="Website Logo" class="nav_logo" loading="lazy">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="{% url 'home' %}">Домашня сторінка</a>
-                        <a class="nav-link" href="{% url 'all_exercises' %}">Усі вправи</a>
-                    </div>
+
+                <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNav">
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-5">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home_ukr' %}">Головна</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all_exercises' %}">Усі вправи</a>
+                        </li>
+                        <li class="nav-item d-lg-none nav-admin">
+                            <a class="nav-link" href="/admin">Admin Page</a>
+                        </li>
+                    </ul>
                 </div>
+
+                <a class="nav-admin d-none d-lg-block ms-auto" href="/admin">Admin Page</a>
             </div>
         </nav>
-
-        <div class="container mt-5">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Домашня сторінка</a></li>
-                  <li class="breadcrumb-item"><a href="{% url 'all_exercises' %}">Усі вправи</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ specific_exercise.name }}</li>
-                </ol>
-            </nav>
-            
-            <header>
-                <h1>{{ specific_exercise.name }}</h1>
-            </header>
-            <section>
-                {{ specific_exercise.desc|safe }}
-            </section>
-        </div>
-
+        
+        <!-- Specific exercise information -->
+        <section class="container mt-5 last-container">
+            <div class="shadow-lg p-5 rounded-3 bg-white">
+                <h3 class="mb-4 text-center">{{ specific_exercise.name_ukr }}</h3>
+                <hr>
+                <div class="desc-margin">{{ specific_exercise.desc|safe }}</div>
+            </div>
+        </section>
+    
         <!-- Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>

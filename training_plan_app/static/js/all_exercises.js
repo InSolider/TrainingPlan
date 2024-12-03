@@ -1,9 +1,10 @@
+// Search for an exercise by name
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById('search-field');
-    const exerciseList = document.getElementById('exercise-list');
+    const exerciseList = document.getElementById('exercises-list');
 
     const loadingIndicator = document.createElement('p');
-    loadingIndicator.textContent = 'Завантаження вправ...';
+    loadingIndicator.textContent = 'Завантаження списку вправ...';
     exerciseList.appendChild(loadingIndicator);
 
     let exercisesCache = [];
@@ -26,31 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     'Accept': 'application/json'
                 }
             });
-            if (!response.ok) throw new Error('Помилка мережі');
+
+            if (!response.ok) throw new Error('Помилка мережі.');
+            
             exercisesCache = await response.json();
             localStorage.setItem('exercisesCache', JSON.stringify(exercisesCache));
             displayExercises(exercisesCache);
         } catch (error) {
-            console.error('Помилка завантаження вправ:', error);
-            displayError(`Помилка завантаження вправ: ${error.message}`);
+            console.error('Помилка завантаження списку вправ:', error);
+            displayError(`Помилка завантаження списку вправ: ${error.message}`);
         } finally {
             loadingIndicator.remove();
         }
     };
 
-    const createExerciseItem = ({ name, link }) => {
+    const createExerciseItem = ({ name_ukr, link }) => {
         return `
-            <div class="exercise-item">
-                <a href="${link}">
-                    <strong>${name}</strong>
-                </a>
-            </div>
+            <a href="${link}" class="list-group-item list-group-item-action">${name_ukr}</a>
         `;
     };
 
     const displayExercises = (exercises) => {
         exerciseList.innerHTML = exercises.length === 0 
-            ? '<p>Немає доступних вправ.</p>' 
+            ? '<h5 style="text-align: center;">Вправ з такою назвою не знайдено.</h5>' 
             : exercises.map(createExerciseItem).join('');
     };
 
@@ -68,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const filterExercises = () => {
         const query = searchInput.value.toLowerCase();
-        const filteredExercises = exercisesCache.filter(({ name }) =>
-            name.toLowerCase().includes(query)
+        const filteredExercises = exercisesCache.filter(({ name_ukr }) =>
+            name_ukr.toLowerCase().includes(query)
         );
         displayExercises(filteredExercises);
     };

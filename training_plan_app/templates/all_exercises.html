@@ -8,51 +8,61 @@
         <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
         <title>Усі вправи</title>
 
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Bootstrap Icons CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/all_exercises.css' %}" />
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/favicon.svg' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+        <!-- Navigation Header -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm navbar-color-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home_ukr' %}" aria-label="Home">
+                    <img src="{% static 'img/favicon.svg' %}" alt="Website Logo" class="nav_logo" loading="lazy">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="{% url 'home' %}">Домашня сторінка</a>
-                        <a class="nav-link active" aria-current="page" href="{% url 'all_exercises' %}">Усі вправи</a>
-                    </div>
+
+                <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNav">
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-5">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home_ukr' %}">Головна</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all_exercises' %}" aria-current="page">Усі вправи</a>
+                        </li>
+                        <li class="nav-item d-lg-none nav-admin">
+                            <a class="nav-link" href="/admin">Admin Page</a>
+                        </li>
+                    </ul>
                 </div>
+
+                <a class="nav-admin d-none d-lg-block ms-auto" href="/admin">Admin Page</a>
             </div>
         </nav>
-
-        <div class="container mt-5">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{% url 'home' %}">Домашня сторінка</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Усі вправи</li>
-                </ol>
-            </nav>
-
-            <h1>Список усіх вправ</h1> <hr />
-
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="search-field-label">
-                    <i class="bi bi-search"></i>
-                </span>
-                <input type="search" id="search-field" class="form-control" placeholder="Пошук вправи за назвою" aria-label="Search field" aria-describedby="search-field-label">
-            </div>
-            
-            <div id="exercise-list"></div>
-        </div>
         
+        <!-- All exercises list -->
+        <section class="container mt-5 last-container">
+            <div class="shadow-lg p-5 rounded-3 bg-white">
+                <h3 class="mb-4 text-center">Список усіх вправ на сайті:</h3>
+
+                <!-- Search field -->
+                <div class="position-relative search-margin">
+                    <i class="fa-solid fa-magnifying-glass position-absolute top-50 translate-middle-y ps-3"></i>
+                    <input type="text" id="search-field" class="form-control ps-5 py-3" placeholder="Знайти вправу за назвою...">
+                </div>
+                <br>
+                <div class="list-group list-group-numbered" id="exercises-list"></div>
+            </div>
+        </section>
+    
         <!-- Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

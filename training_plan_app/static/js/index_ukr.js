@@ -315,7 +315,7 @@ document.getElementById("download-btn").addEventListener("click", async (event) 
         // Creating a download link
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = `План_тренувань_${formattedDate}.png`;
+        link.download = `План_тренувань_від_${formattedDate}.png`;
         link.click();
     } catch (error) {
         console.error("Помилка під час збереження зображення:", error);

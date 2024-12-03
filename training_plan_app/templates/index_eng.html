@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Basic -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+        <title>Home Page</title>
+
+        <!-- flag-icons CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/7.2.3/css/flag-icons.min.css" integrity="sha512-bZBu2H0+FGFz/stDN/L0k8J0G8qVsAL0ht1qg5kTwtAheiXwiRKyCq1frwfbSFSJN3jooR5kauE0YjtPzhZtJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    </head>
+
+    <body>
+        <!-- Navigation Header -->
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm navbar-color-bottom">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home_eng' %}" aria-label="Home">
+                    <img src="{% static 'img/favicon.svg' %}" alt="Website Logo" class="nav_logo" loading="lazy">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-lg-center" id="navbarNav">
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-5">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home_eng' %}" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'all_exercises' %}">All Exercises</a>
+                        </li>
+                        <li class="nav-item d-lg-none nav-admin">
+                            <a class="nav-link" href="/admin">Admin Page</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a class="nav-admin d-none d-lg-block ms-auto" href="/admin">Admin Page</a>
+            </div>
+        </nav>
+        
+        <!-- Step 1. BMR Calculation -->
+        <section class="container mt-5">
+            <div class="shadow-lg p-5 rounded-3 bg-white">
+                <form id="BMR-calculation-form">
+                    <h3 class="mb-4 text-left">Step 1. Calculation of basal metabolism:</h3>
+                    
+                    <div class="row gx-5 mb-3">
+                        <!-- Age Input Field -->
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                            <label for="age" class="form-label">Age<span class="text-danger">*</span></label>
+                            <input id="age" name="age" class="form-control" type="number" min="18" max="80" placeholder="18 – 80" required>
+                        </div>
+
+                        <!-- Weight Input Field -->
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-weight-scale" aria-hidden="true"></i>
+                            <label for="weight" class="form-label">Weight<span class="text-danger">*</span></label>
+                            <input id="weight" name="weight" class="form-control" type="number" min="40" max="200" placeholder="40 – 200 kg" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row gx-5 mb-3">
+                        <!-- Height Input Field -->
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-ruler-vertical" aria-hidden="true"></i>
+                            <label for="height" class="form-label">Height<span class="text-danger">*</span></label>
+                            <input id="height" name="height" class="form-control" type="number" min="140" max="210" placeholder="140 – 210 cm" required>
+                        </div>
+
+                        <!-- Gender Radios Field -->
+                        <div class="col-sm-6">
+                            <i class="fa-solid fa-user" aria-hidden="true"></i>
+                            <label class="form-label" for="male">Gender<span class="text-danger">*</span></label>
+                            <div class="d-flex">
+                                <div class="form-check me-4">
+                                    <input id="male" name="gender" class="form-check-input" type="radio" name="gender" value="male" required>
+                                    <label for="male" class="form-check-label">Man</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="female" name="gender" class="form-check-input" type="radio" name="gender" value="female" required>
+                                    <label for="female" class="form-check-label">Woman</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3 mt-4 d-flex align-items-center">
+                        <!-- Output of BMR calculation result -->
+                        <div class="col-sm-6">
+                            <span>
+                                According to the Mifflin-St Jeor formula 
+                                <i class="fa-regular fa-circle-question" aria-hidden="true" data-bs-toggle="tooltip" title="Формула Міфліна-Сан Жеора використовується для розрахунку кількості калорій, які організм споживає у стані спокою для підтримки своїх основних функцій життєдіяльності."></i> 
+                                your BMR is: <strong id="BMR-calculation-result">-</strong> kcal.
+                            </span>
+                        </div>
+                        
+                        <!-- Button for BMR calculation -->
+                        <div class="col-sm-6">
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn active-button w-50 py-3">Calculate</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Step 2. Individual effectiveness for all exercises -->
+        <section class="container mt-5">
+            <div class="shadow-lg p-5 rounded-3 bg-white">
+                <h3 class="mb-4 text-left">Step 2. Determining exercise efficiency:</h3>
+                {% if predictions %}
+                <!-- Table of all exercises with individual effectiveness -->
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"><i class="fa-regular fa-clipboard" aria-hidden="true"></i> Exercise name</th>
+                            <th scope="col"><i class="fa-regular fa-clock" aria-hidden="true"></i> Duration (min)</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i> Estimated kilocalorie burn</th>
+                        </tr>
+                    </thead>
+                    {% for result in predictions %}
+                        <tr>
+                            <td class="text-center">
+                                <input class="form-check-input exercise-checkbox justify-content-center" type="checkbox" value="{{ result.name }}" data-duration="{{ result.duration }}" data-calories="{{ result.prediction }}">
+                            </td>
+                            <td>{{ result.name }}</td>
+                            <td>{{ result.duration }}</td>
+                            <td>{{ result.prediction }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% else %}
+                <!-- Empty table before calculating individual effectiveness -->
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"><i class="fa-regular fa-clipboard" aria-hidden="true"></i> Exercise name</th>
+                            <th scope="col"><i class="fa-regular fa-clock" aria-hidden="true"></i> Duration (min)</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i> Estimated kilocalorie burn</th>
+                        </tr>
+                    </thead>
+                        <tr>
+                            <td class="text-center"><input class="form-check-input" type="checkbox" disabled></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                </table>
+                {% endif %}
+                <div class="row mb-3 mt-4 d-flex align-items-center">
+                    <div class="col-sm-6">
+                        <span>
+                            A regression model is used to determine individual exercise efficiency.
+                            <i class="fa-regular fa-circle-question" aria-hidden="true" data-bs-toggle="tooltip" title="Модель регресії — це статистичний метод, який використовується для прогнозування значення залежної змінної (витрачені калорії) на основі незалежних змінних (вік, зріст, вага, стать та час виконання вправи)."></i>.
+                        </span>
+                    </div>
+                        
+                    <!-- Button for predicting the individual effectiveness of all exercises -->
+                    <div class="col-sm-6">
+                        <form id="individual-effectiveness-form" method="post">
+                            {% csrf_token %}
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn active-button w-50 py-3" onclick="individualEffectivenessForm(event)">Determine</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3. Building a training plan -->
+        <section class="container last-container mt-5">
+            <div class="shadow-lg p-5 rounded-3 bg-white training-plan-screenshot">
+                <h3 class="mb-4 text-left">Step 3. Creating a weekly workout schedule:</h3>
+
+                <!-- Table of the selected exercises -->
+                <table class="table table-bordered table-striped table-hover" id="selected-exercises-table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Selected exercises</th>
+                            <th scope="col"><i class="fa-regular fa-clock" aria-hidden="true"></i> Duration (min)</th>
+                            <th scope="col"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i> Estimated kilocalorie burn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selected-exercises-list"></tbody>
+                </table>
+
+                <!-- Result of one training session -->
+                <div class="d-flex justify-content-end">
+                    <span>Calories burned in one workout will be <strong id="total-calories">0</strong> kcal.</span>
+                </div>
+
+                <div class="row mb-3 mt-4 d-flex align-items-center">
+
+                    <!-- Daily calorie intake input field -->
+                    <div class="col-sm-6">
+                        <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                        <label for="calories-quantity" class="form-label">Throughout the week, I plan to consume this many kilocalories each day:</label>
+                        <input id="calories-quantity" name="calories-quantity" class="form-control" type="number" min="1" placeholder="0">
+                    </div>
+
+                    <!-- Number of training sessions per week input field -->
+                    <div class="col-sm-6">
+                        <i class="fa-solid fa-dumbbell" aria-hidden="true"></i>
+                        <label for="exercises-quantity" class="form-label">Throughout the week, I plan to have this many workouts:</label>
+                        <input id="exercises-quantity" name="exercises-quantity" class="form-control" type="number" min="1" placeholder="0">
+                    </div>
+                </div>
+
+                <!-- Result of the training plan after one week -->
+                <span>After a week of workouts, you will achieve: <strong id="calories-difference">0</strong> kcal or <strong id="weight-difference">0</strong> kg of fat.</span>
+
+                <div class="row mb-3 mt-4 d-flex align-items-center">
+                    <div class="col-sm-6">
+                        <span>
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            The difference in weekly kilocalories is calculated using the formula:
+                            <p>(Consumed kcal - BMR) * 7 - (kcal for workouts * number of workouts).</p>
+                        </span>
+                    </div>
+                        
+                    <!-- Button for downloading the training plan -->
+                    <div class="col-sm-6 exclude">
+                        <div class="d-flex justify-content-center">
+                            <button id="download-btn" data-icon-url="{% static 'img/favicon.svg' %}" class="btn active-button w-50 py-3">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <a href="{% url 'home_ukr' %}">
+            <p style="text-align: center;"><span class="fi fi-ua"></span> Створити тренувальний план українською. <span class="fi fi-ua"></span></p>
+        </a>
+    
+        <!-- Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- html-to-image JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js" integrity="sha512-7tWCgq9tTYS/QkGVyKrtLpqAoMV9XIUxoou+sPUypsaZx56cYR/qio84fPK9EvJJtKvJEwt7vkn6je5UVzGevw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Custom JS -->
+        <script src="{% static 'js/index_eng.js' %}"></script>
+    </body>
+</html>
